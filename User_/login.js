@@ -12,7 +12,8 @@ import {
     PixelRatio,
     ImageBackground
 } from 'react-native';
-import Search from './login_text'
+import Search from './login_text';
+import Register from './register.js';
 var Dimensions = require('Dimensions');
 var ScreenWidth = Dimensions.get('window').width;
 var ScreenHeight = Dimensions.get('window').height;
@@ -42,7 +43,7 @@ export default class Login extends Component<Props> {
                 <View style={{flexDirection:"row",margin:ScreenHeight/20,justifyContent : "center",alignItems :"center",}}>
                     <TouchableOpacity 
                       style={styles.bnt} 
-                      onPress={()=>this._regist()}
+                     onPress={()=>this._regist()}
                     >
                         <Text style={{fontSize:20,justifyContent : "center",alignItems :"center",}}>登录</Text>
                     </TouchableOpacity>
@@ -50,7 +51,8 @@ export default class Login extends Component<Props> {
                     </View>
                     <TouchableOpacity 
                       style={styles.bnt} 
-                      onPress={()=>this._regist()}
+                      
+                       onPress={()=>{this.props.navigation.navigate('log')}}
                     >
                         <Text style={{fontSize:20,justifyContent : "center",alignItems :"center",}}>注册</Text>
                     </TouchableOpacity>

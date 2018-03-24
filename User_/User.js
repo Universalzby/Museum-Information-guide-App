@@ -14,10 +14,11 @@ import {
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 const {Surface, Group, Shape} = ART;
-import Header from './Header'
-import Person from './person'
-import Icon from './Icon'
-import Login from './login'
+import Header from './Header';
+import Person from './person';
+import Icon from './Icon';
+import Login from './login';
+import Register from './register.js';
 var Dimensions = require('Dimensions');
 var ScreenWidth = Dimensions.get('window').width;
 var ScreenHeight = Dimensions.get('window').height;
@@ -187,7 +188,13 @@ const ModalStack = StackNavigator({
       	headerTitle:
       	 '                   	博物馆'
     }
+  },
+  log:{
+  	screen:Register,
+  	navigationOptions:{
+  		headerTitle:
+  		''
+  	}
   }
-   
 });
 export default ModalStack;

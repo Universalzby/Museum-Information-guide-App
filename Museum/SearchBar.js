@@ -23,7 +23,7 @@ export default class Home_list extends Component<Props> {
 	render(){
 		return(
 		<View style={styles.container}>
-	        <View style={{margin:5}}>
+	        <View style={{margin:ScreenWidth/20}}>
 	          <TextInput style={styles.input} {...this.props} />  
 	        </View>
       	</View>
