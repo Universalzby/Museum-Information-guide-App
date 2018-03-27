@@ -18,7 +18,8 @@ import Header from './Header';
 import Person from './person';
 import Icon from './Icon';
 import Login from './login';
-import Register from './register.js';
+import MyComment from './comment';
+import MyLike from './like';
 var Dimensions = require('Dimensions');
 var ScreenWidth = Dimensions.get('window').width;
 var ScreenHeight = Dimensions.get('window').height;
@@ -26,10 +27,29 @@ class User extends Component<Props> {
 	constructor(props) {
 	  super(props);
 	
-	  this.state = {};
+	  this.state = {
+	  		statement:false,
+	  		name:null,
+	  };
 	}
+	_coments(){
+		if(this.state.statement == false)
+			this.props.navigation.navigate('Profile');
+		else
+			this.props.navigation.navigate('Comment',{name:this.state.name});
+	}
+	_likes(){
+		if(this.state.statement == false)
+			this.props.navigation.navigate('Profile');
+		else
+			this.props.navigation.navigate('MyLike',{name:this.state.name});
+	}
+	_exit(){
+		this.setState({statement:false})
 
+	}
 	render(){
+		 const  {navigate} = this.props.navigation;
 		return(
 			<View style={{flexDirection:"row",}}> 
 				<ImageBackground
@@ -37,7 +57,7 @@ class User extends Component<Props> {
               		source={require('./../Image/user.jpg')}	
 				>
 					<View style={{}}>
-						
+
 
 						<View style={styles.middle}>
 							<View style={[styles.person_name,{justifyContent : "center",alignItems :"center",}]}>
@@ -49,16 +69,25 @@ class User extends Component<Props> {
 							</View>
 							<View style={{width:ScreenWidth/5}}>
 							</View>
-							<View style={[styles.logout,{width:ScreenWidth/2}]}>
-								<TouchableOpacity 
-									style={{height:50,justifyContent : "center",alignItems :"center",}}
-									onPress={()=>{this.props.navigation.navigate('Profile')}}
-								>
-									<Text style={{fontSize:20}}>
-										登陆/注册
+							
+								{
+									this.state.statement==false?
+									<View style={[styles.logout,{width:ScreenWidth/2}]}>
+										<TouchableOpacity 
+											style={{height:50,justifyContent : "center",alignItems :"center",}}
+											onPress={()=>{this.props.navigation.navigate('Profile',{callBack:(data)=>{this.setState({name:data,statement:true})}})}}
+										>
+											<Text style={{fontSize:20}}>
+												登陆/注册
+											</Text>
+										</TouchableOpacity>
+									</View>
+									:
+									<Text style={styles.text_}>
+										{this.state.name}
 									</Text>
-								</TouchableOpacity>
-							</View>
+								}
+							
 						</View>
 						<View style={{height:15,backgroundColor:"#87cefa"}}>	
 						</View>
@@ -66,7 +95,7 @@ class User extends Component<Props> {
 							<View style={{left:0}}>
 								<TouchableOpacity 
 									style={[styles.func,{paddingLeft:ScreenWidth/18,paddingRight:ScreenHeight/20}]}
-									onPress={()=>{this.props.navigation.navigate('Profile')}}
+									onPress={()=>this._coments()}
 								>
 									<Image
 										style={{height:33,width:40}}
@@ -94,7 +123,7 @@ class User extends Component<Props> {
 							<View style={{left:0}}>
 								<TouchableOpacity 
 									style={[styles.func,{paddingLeft:ScreenWidth/15,paddingRight:ScreenHeight/20}]}
-									onPress={()=>{this.props.navigation.navigate('Profile')}}
+									onPress={()=>this._likes()}
 								>
 									<Image
 										style={{height:40,width:38}}
@@ -122,7 +151,10 @@ class User extends Component<Props> {
 							
 						</View>
 						<View style={[styles.logout,{margin:10}]}>
-							<TouchableOpacity style={{height:50,justifyContent : "center",alignItems :"center",}}>
+							<TouchableOpacity 
+								style={{height:50,justifyContent : "center",alignItems :"center",}}
+								onPress={()=>this._exit()}
+							>
 								<Text style={{fontSize:20}}>
 									退出登录
 								</Text>
@@ -172,29 +204,43 @@ const styles = StyleSheet.create({
    		overflow:"hidden",
    		backgroundColor:"pink",
    		height:50,
-   }
+   },
+   text_:{
+    textShadowColor:'#7fff00',
+    textShadowRadius:2,
+    textShadowOffset:{width:2,height:2},
+    fontSize :30,
+  },
 });
 const ModalStack = StackNavigator({
  Home: {
     screen: User,
     navigationOptions: {
       	headerTitle: 
-      	'                                    我的'
+      	'我的'
     }
   },
   Profile: {
     screen: Login,
     navigationOptions: {
       	headerTitle:
-      	 '                   	博物馆'
+      	 ''
     }
   },
-  log:{
-  	screen:Register,
-  	navigationOptions:{
-  		headerTitle:
-  		''
-  	}
+
+  Comment: {
+    screen:MyComment,
+    navigationOptions: {
+      	headerTitle:
+      	 ''
+    }
+  },
+  MyLike:{
+  	screen:MyLike,
+    navigationOptions: {
+      	headerTitle:
+      	 ''
+    }
   }
 });
 export default ModalStack;

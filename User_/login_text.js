@@ -15,7 +15,7 @@ export default class Search extends Component{
     return(
       <View style={styles.container}>
         <View style={styles.inputContainer}>
-          <TextInput password={true}
+          <TextInput 
           style={styles.input} {...this.props} />  
         </View>
       </View>

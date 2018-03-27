@@ -8,16 +8,17 @@ import {
   ActivityIndicator,
   StatusBar
 } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 import TabNavigator from 'react-native-tab-navigator';
-import User from './User_/User'
-import Home_list from './Museum/home_list'
-type Props = {};
+import User from './User_/User';
+import Museum_Home_list from './Museum/home_list';
+import News_Home_list from './News/home_list';
 export default class App extends Component<Props> {
   constructor(props) {
     super(props);
   
     this.state = {
-        tab:"博物馆",
+        tab:"用户",
         value:"old"
     };
   }
@@ -35,7 +36,7 @@ export default class App extends Component<Props> {
                     source={require('./Image/hourse.png')}></Image>}  
               
           >      
-          <Home_list/>
+          <Museum_Home_list/>
           </TabNavigator.Item>  
 
           <TabNavigator.Item  
@@ -48,9 +49,10 @@ export default class App extends Component<Props> {
                     style={{width:35,height:27}}  
                     source={require('./Image/book.png')}></Image>}
           >  
-          <View>
-              <Text>dawaw</Text>
-          </View>
+          <News_Home_list
+            
+
+          />
           </TabNavigator.Item>
 
 
@@ -64,7 +66,9 @@ export default class App extends Component<Props> {
                     style={{width:35,height:27}}  
                     source={require('./Image/my.png')}></Image>}  
           >  
-          <User/>
+          <User
+              
+          />
           
         </TabNavigator.Item>  
       </TabNavigator>

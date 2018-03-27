@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import Search from './login_text';
 import Register from './register.js';
+import User from './User.js';
 var Dimensions = require('Dimensions');
 var ScreenWidth = Dimensions.get('window').width;
 var ScreenHeight = Dimensions.get('window').height;
@@ -21,11 +22,47 @@ export default class Login extends Component<Props> {
     constructor(props) {
       super(props);
       this.state = {
+          name:"",
+          pwd:"",
+          data:{
 
+          }
       };
     }
+    _getData(){
+        let formData = new FormData();  
+        formData.append("loginname",this.state.name);  
+        formData.append("password",this.state.pwd);  
+        let url = "http://139.199.102.73:8080/api/user/login"
+        fetch(url , {  
+           method: 'POST',  
+           headers: {},  
+           body: formData,
+           }  
+        )
+        .then((response) => {  
+            if (response.ok) {  
+                return response.json();  
+        }})
+        .then((json) => {  
+          this.setState({data:json});
+          alert(json.msg);
 
+        })
+        .catch((error) => {  
+         console.error(error);  
+        }); 
+    }
+    back = (state,goBack)=>{ //把属性传递过来，然后进行使用
+        this._getData();
+        if(this.state.data.valid == 1)
+        {
+            state.params.callBack(this.state.name) //回调传值
+            goBack() //点击POP上一个页面得方法
+        }
+    }
     render(){
+      const  {navigate,state,goBack,} = this.props.navigation;
       return(
         <View style={{flexDirection:"row",}}>
             <ImageBackground
@@ -38,12 +75,18 @@ export default class Login extends Component<Props> {
                     欢迎来到博物馆
                   </Text>
                 </View>
-                <Search/>
-                <Search/>
+                <Search
+                    
+                    onChangeText={(text) => this.setState({name: text})}
+                />
+                <Search
+                    secureTextEntry={true}
+                    onChangeText={(text) => this.setState({pwd: text})}
+                />
                 <View style={{flexDirection:"row",margin:ScreenHeight/20,justifyContent : "center",alignItems :"center",}}>
                     <TouchableOpacity 
                       style={styles.bnt} 
-                     onPress={()=>this._regist()}
+                      onPress={()=>this.back(state,goBack)}
                     >
                         <Text style={{fontSize:20,justifyContent : "center",alignItems :"center",}}>登录</Text>
                     </TouchableOpacity>
