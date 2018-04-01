@@ -20,6 +20,7 @@ import Icon from './Icon';
 import Login from './login';
 import MyComment from './comment';
 import MyLike from './like';
+import Regiter from './register';
 var Dimensions = require('Dimensions');
 var ScreenWidth = Dimensions.get('window').width;
 var ScreenHeight = Dimensions.get('window').height;
@@ -241,6 +242,13 @@ const ModalStack = StackNavigator({
       	headerTitle:
       	 ''
     }
-  }
+  },
+   Reg:{
+   	screen:Regiter,
+   	navigationOptions: {
+      	headerTitle:
+      	 ''
+   	}
+	}
 });
 export default ModalStack;

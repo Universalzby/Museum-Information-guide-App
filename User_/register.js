@@ -21,11 +21,53 @@ export default class Login extends Component<Props> {
     constructor(props) {
       super(props);
       this.state = {
+          name:"",
+          pwd:"",
+          repwd:"",
+          data:{
 
+          }
       };
     }
+    _getData(){
+        let formData = new FormData();  
+        formData.append("loginname",this.state.name);  
+        formData.append("password",this.state.pwd);  
+        let url = "http://139.199.102.73:8080/api/user/reg/"
+        fetch(url , {  
+           method: 'POST',  
+           headers: {},  
+           body: formData,
+           }  
+        )
+        .then((response) => {  
+            if (response.ok) {  
+                return response.json();  
+        }})
+        .then((json) => {  
+          this.setState({data:json});
+          alert(json.msg);
 
+        })
+        .catch((error) => {  
+         console.error(error);  
+        }); 
+    }
+    back = (state,goBack)=>{ //把属性传递过来，然后进行使用
+      if(this.state.pwd!=this.state.repwd)
+        alert("俩次密码输入不一致!!!");
+      else{
+            this._getData();
+            if(this.state.data.valid == 1)
+            {
+                state.params.callBack() //回调传值
+                goBack() //点击POP上一个页面得方法
+            }
+      }
+        
+    }
     render(){
+       const  {navigate,state,goBack,} = this.props.navigation;
       return(
         <View style={{flexDirection:"row",}}>
             <ImageBackground
@@ -38,15 +80,23 @@ export default class Login extends Component<Props> {
                     欢迎加入博物馆
                   </Text>
                 </View>
-                <Search/>
-                <Search/>
-                <Search/>
+                <Search
+                    onChangeText={(text) => this.setState({name: text})}
+                />
+                <Search
+                    onChangeText={(text) => this.setState({pwd: text})}
+                    secureTextEntry={true}
+                />
+                <Search
+                    onChangeText={(text) => this.setState({repwd: text})}
+                    secureTextEntry={true}
+                />
                 <View style={{height:ScreenHeight/30}}>
                 </View>
                 <View style={{flexDirection:"row",marginLeft:ScreenWidth/20,justifyContent : "center",alignItems :"center",}}>
                     <TouchableOpacity 
                       style={styles.bnt} 
-                     onPress={()=>this._regist()}
+                      onPress={()=>this.back(state,goBack)}
                     >
                         <Text style={{fontSize:20,justifyContent : "center",alignItems :"center",}}>确定</Text>
                     </TouchableOpacity>

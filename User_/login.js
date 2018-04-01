@@ -95,7 +95,7 @@ export default class Login extends Component<Props> {
                     <TouchableOpacity 
                       style={styles.bnt} 
                       
-                       onPress={()=>{this.props.navigation.navigate('log')}}
+                       onPress={()=>{this.props.navigation.navigate('Reg',{callBack:(data)=>{this.setState({})}})}}
                     >
                         <Text style={{fontSize:20,justifyContent : "center",alignItems :"center",}}>注册</Text>
                     </TouchableOpacity>

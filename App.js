@@ -34,16 +34,17 @@ export default class App extends Component<Props> {
               renderIcon={()=><Image  
                     style={{width:60,height:40}}  
                     source={require('./Image/hourse.png')}></Image>}  
-              
           >      
-          <Museum_Home_list/>
+          <Museum_Home_list 
+              
+          />
           </TabNavigator.Item>  
 
           <TabNavigator.Item  
-              title="other"  
-              selected={this.state.tab==='other'}  
+              title="新闻消息"  
+              selected={this.state.tab==='新闻消息'}  
               onPress={()=>{
-              this.setState({tab:'other'});
+              this.setState({tab:'新闻消息'});
               }}  
               renderIcon={()=><Image  
                     style={{width:35,height:27}}  
