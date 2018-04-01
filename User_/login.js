@@ -57,6 +57,8 @@ export default class Login extends Component<Props> {
         this._getData();
         if(this.state.data.valid == 1)
         {
+            global.username = this.state.name
+            global.statement = true;
             state.params.callBack(this.state.name) //回调传值
             goBack() //点击POP上一个页面得方法
         }
@@ -86,7 +88,7 @@ export default class Login extends Component<Props> {
                 <View style={{flexDirection:"row",margin:ScreenHeight/20,justifyContent : "center",alignItems :"center",}}>
                     <TouchableOpacity 
                       style={styles.bnt} 
-                      onPress={()=>this.back(state,goBack)}
+                      onPressIn={()=>this.back(state,goBack)}
                     >
                         <Text style={{fontSize:20,justifyContent : "center",alignItems :"center",}}>登录</Text>
                     </TouchableOpacity>

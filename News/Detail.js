@@ -12,7 +12,7 @@ import {
 import { StackNavigator } from 'react-navigation';
 import  Util from'./Util';
 import Item from './Item';
-
+import Comments from './../Comments/show_comment'
  class Detail extends Component{
 	constructor (){
 		super();
@@ -49,8 +49,18 @@ import Item from './Item';
 							</View>
 							<View style={{marginTop:10}}>
 								<Text style={styles.title}>评论</Text>
-								<Text style={styles.text}>{this.state.bookData.author_intro}</Text>
+								<Text style={styles.text}>用户:{global.username}</Text>
 							</View>
+							{
+								global.statement==false?
+									<View style={styles.common}>
+										<Text>
+											登录查看评论
+										</Text>
+									</View>
+									:
+									<Comments/>
+							}
 							<View style={{height:55}}>
 							</View>
 						</View>
@@ -80,6 +90,10 @@ var styles = StyleSheet.create({
 		marginLeft :10,
 		marginRight:10,
 		color:"#000D22"
+	},
+	common:{
+		justifyContent :"center",
+	    alignItems : "center"
 	}
 });
 

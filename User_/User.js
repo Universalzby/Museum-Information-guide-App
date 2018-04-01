@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 const {Surface, Group, Shape} = ART;
+import app from './../App';
 import Header from './Header';
 import Person from './person';
 import Icon from './Icon';
@@ -32,6 +33,8 @@ class User extends Component<Props> {
 	  		statement:false,
 	  		name:null,
 	  };
+	  global.username="";
+	  global.statement=false;
 	}
 	_coments(){
 		if(this.state.statement == false)
@@ -47,7 +50,9 @@ class User extends Component<Props> {
 	}
 	_exit(){
 		this.setState({statement:false})
-
+		global.statement = false;
+		global.username="";
+		
 	}
 	render(){
 		 const  {navigate} = this.props.navigation;
@@ -151,16 +156,24 @@ class User extends Component<Props> {
 						<View style={{height:ScreenHeight/3.1,justifyContent : "center",alignItems :"center",}}>
 							
 						</View>
-						<View style={[styles.logout,{margin:10}]}>
-							<TouchableOpacity 
-								style={{height:50,justifyContent : "center",alignItems :"center",}}
-								onPress={()=>this._exit()}
-							>
-								<Text style={{fontSize:20}}>
-									退出登录
-								</Text>
-							</TouchableOpacity>
-						</View>
+						
+							{
+								this.state.statement==true?
+								<View style={[styles.logout,{margin:10}]}>
+									<TouchableOpacity 
+										style={{height:50,justifyContent : "center",alignItems :"center",}}
+										onPress={()=>this._exit()}
+									>
+										<Text style={{fontSize:20}}>
+											退出登录
+										</Text>
+									</TouchableOpacity>
+								</View>
+								:
+								<View style={{height:50}}>
+								</View>
+							}
+						
 					</View>
 				</ImageBackground>
 			</View>

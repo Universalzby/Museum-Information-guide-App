@@ -18,8 +18,10 @@ export default class App extends Component<Props> {
     super(props);
   
     this.state = {
-        tab:"用户",
-        value:"old"
+        tab:"新闻消息",
+        value:"old",
+        user:"",
+        statement:""
     };
   }
   render() {
@@ -68,7 +70,7 @@ export default class App extends Component<Props> {
                     source={require('./Image/my.png')}></Image>}  
           >  
           <User
-              
+
           />
           
         </TabNavigator.Item>  

@@ -10,6 +10,7 @@ import {
 
 export default class BookItem extends Component{
 	constructor(props) {
+
 	  super(props);
 	}
 	render(){
@@ -17,7 +18,7 @@ export default class BookItem extends Component{
 		return(
 			<TouchableOpacity style={styles.item} {...this.props}>
 				<View style={styles.imageContainer}>
-					<Image style={styles.image} source={{uri:book.image}}/>
+					<Image style={styles.image} source={{uri:book.img_url}}/>
 				</View>
 
 				<View style={styles.contentContainer}>
