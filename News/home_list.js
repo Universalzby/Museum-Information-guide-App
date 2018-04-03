@@ -38,8 +38,8 @@ var ScreenHeight = Dimensions.get('window').height;
 			show:false
 		});
 		var that = this; 
-		//var url ="http://139.199.102.73:8080/api/news/search/?title="+this.state.keywords 
-		var url ="http://139.199.102.73:8080/api/news/latest" 
+		// var url ="http://139.199.102.73:8080/api/news/search/?title="+this.state.keywords 
+		var url ="http://139.199.102.73:8080/api/news/latest"
 		Util.getRequest(url,function(data){
 				if(!data || data.length==0)
 				{

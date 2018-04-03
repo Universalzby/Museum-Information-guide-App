@@ -18,7 +18,7 @@ import User from './User.js';
 var Dimensions = require('Dimensions');
 var ScreenWidth = Dimensions.get('window').width;
 var ScreenHeight = Dimensions.get('window').height;
-export default class Login extends Component<Props> {
+export default class Login extends Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -88,7 +88,7 @@ export default class Login extends Component<Props> {
                 <View style={{flexDirection:"row",margin:ScreenHeight/20,justifyContent : "center",alignItems :"center",}}>
                     <TouchableOpacity 
                       style={styles.bnt} 
-                      onPressIn={()=>this.back(state,goBack)}
+                      onPress={()=>this.back(state,goBack)}
                     >
                         <Text style={{fontSize:20,justifyContent : "center",alignItems :"center",}}>登录</Text>
                     </TouchableOpacity>

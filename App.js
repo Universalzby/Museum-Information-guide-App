@@ -18,7 +18,7 @@ export default class App extends Component<Props> {
     super(props);
   
     this.state = {
-        tab:"新闻消息",
+        tab:"用户",
         value:"old",
         user:"",
         statement:""
@@ -50,7 +50,7 @@ export default class App extends Component<Props> {
               }}  
               renderIcon={()=><Image  
                     style={{width:35,height:27}}  
-                    source={require('./Image/book.png')}></Image>}
+                    source={require('./Image/news.png')}></Image>}
           >  
           <News_Home_list
             
