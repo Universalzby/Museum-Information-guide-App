@@ -14,6 +14,7 @@ import {
 	LinearGradient,
 } from 'react-native';
 // import {LinearGradient} from 'react-native-linear-gradient';
+import Personal_set from './../Personal_page/Personal_set.js';
 import { StackNavigator } from 'react-navigation';
 const {Surface, Group, Shape} = ART;
 // import Fresh from './../refresh';
@@ -58,7 +59,10 @@ class User extends Component { //<Props>
 		
 	}
 	_s(){
-		alert("设置")
+		if (this.state.statement == false)
+			alert('请先登录');
+		else
+			this.props.navigation.navigate('Set', { name: this.state.name });
 	}
 	render(){
 		 const  {navigate} = this.props.navigation;
@@ -98,7 +102,7 @@ class User extends Component { //<Props>
 							</View>
 							<View style={{width:ScreenWidth/5}}></View>
 								{
-									this.state.statement==false?
+									!this.state.statement?
 									<View style={[styles.login,{width:ScreenWidth/2}]}>
 										<TouchableOpacity 
 											style={{height:50,justifyContent : "center",alignItems :"center",}}
@@ -403,8 +407,8 @@ const ModalStack = StackNavigator({
 	Profile: {
 		screen: Login,
 		navigationOptions: {
-			headerTitle:
-			''
+			headerTitle:"",
+			// header:null
 		}
  	},
 	Comment: {
@@ -426,6 +430,13 @@ const ModalStack = StackNavigator({
 		navigationOptions: {
 			headerTitle:
 			''
+		}
+	},
+	Set:{
+		screen: Personal_set,
+		navigationOptions: {
+			headerTitle:'',
+			header:null
 		}
 	}
 });

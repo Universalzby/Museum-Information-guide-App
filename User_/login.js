@@ -15,6 +15,7 @@ import {
 import Search from './login_text';
 import Register from './register.js';
 import User from './User.js';
+import Icon_Back from './Icon_Back.js';
 var Dimensions = require('Dimensions');
 var ScreenWidth = Dimensions.get('window').width;
 var ScreenHeight = Dimensions.get('window').height;
@@ -60,7 +61,7 @@ export default class Login extends Component {
             global.username = this.state.name
             global.statement = true;
             state.params.callBack(this.state.name) //回调传值
-            goBack() //点击POP上一个页面得方法
+            goBack() //点击POP上一个页面得方法  this.props.navigation.goBack();
         }
     }
     render(){
@@ -71,37 +72,41 @@ export default class Login extends Component {
               style={{width:ScreenWidth,height:ScreenHeight}}
               source={require('./../Image/bgm.jpg')}
             >
-              <View >
-                <View style={{height:ScreenHeight/4,width:ScreenWidth,justifyContent : "center",alignItems :"center",}}>
-                  <Text style={styles.text_}>
-                    欢迎来到博物馆
-                  </Text>
-                </View>
-                <Search
-                    
-                    onChangeText={(text) => this.setState({name: text})}
-                />
-                <Search
-                    secureTextEntry={true}
-                    onChangeText={(text) => this.setState({pwd: text})}
-                />
-                <View style={{flexDirection:"row",margin:ScreenHeight/20,justifyContent : "center",alignItems :"center",}}>
-                    <TouchableOpacity 
-                      style={styles.bnt} 
-                      onPress={()=>this.back(state,goBack)}
-                    >
-                        <Text style={{fontSize:20,justifyContent : "center",alignItems :"center",}}>登录</Text>
-                    </TouchableOpacity>
-                    <View style={{width:ScreenWidth/18}}>
+                {/* <View style={{borderWidth:1,padding:ScreenWidth/25,flexDirection:"row",height:ScreenHeight/12,}}>
+                    <Icon_Back/>
+                    <Text style={{fontSize:18}}>
+                        返回
+                    </Text>
+                </View> */}
+                <View>
+                    <View style={{height:ScreenHeight/4,width:ScreenWidth,justifyContent : "center",alignItems :"center",}}>
+                    <Text style={styles.text_}>
+                        欢迎来到博物馆
+                    </Text>
                     </View>
-                    <TouchableOpacity 
-                      style={styles.bnt} 
-                      
-                       onPress={()=>{this.props.navigation.navigate('Reg',{callBack:(data)=>{this.setState({})}})}}
-                    >
-                        <Text style={{fontSize:20,justifyContent : "center",alignItems :"center",}}>注册</Text>
-                    </TouchableOpacity>
-                </View>
+                    <Search
+                        
+                        onChangeText={(text) => this.setState({name: text})}
+                    />
+                    <Search
+                        secureTextEntry={true}
+                        onChangeText={(text) => this.setState({pwd: text})}
+                    />
+                    <View style={{flexDirection:"row",margin:ScreenHeight/20,justifyContent : "center",alignItems :"center",}}>
+                        <TouchableOpacity 
+                            style={styles.bnt} 
+                            onPress={()=>this.back(state,goBack)}
+                        >
+                            <Text style={{fontSize:20,justifyContent : "center",alignItems :"center",}}>登录</Text>
+                        </TouchableOpacity>
+                        <View style={{width:ScreenWidth/18}}></View>
+                        <TouchableOpacity 
+                            style={styles.bnt} 
+                            onPress={()=>{this.props.navigation.navigate('Reg',{callBack:(data)=>{this.setState({})}})}}
+                        >
+                            <Text style={{fontSize:20,justifyContent : "center",alignItems :"center",}}>注册</Text>
+                        </TouchableOpacity>
+                    </View>
               </View>
             </ImageBackground>
         </View>
