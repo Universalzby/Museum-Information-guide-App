@@ -18,7 +18,7 @@ export default class Comment extends Component {
       super(props);
     
       this.state = {
-			name:null,
+			names:null,
         
       };
     }
@@ -26,12 +26,14 @@ export default class Comment extends Component {
     render(){
       const {params} = this.props.navigation.state;
       return(
-        <Text>
-            我的评论区:欢迎你{this.state.name}
-        </Text>
+        <View>
+            <Text>
+                {global.username}
+            </Text>
+        </View>
       );
     }
       componentDidMount() {
-        this.setState({name:global.username});
+        this.setState({names:global.username});
     }
 }

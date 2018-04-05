@@ -21,7 +21,7 @@ import Detail from './Detail';
 var Dimensions = require('Dimensions');
 var ScreenWidth = Dimensions.get('window').width;
 var ScreenHeight = Dimensions.get('window').height;
- class Home_list extends Component<Props> {
+ class Home_list extends Component{
 	constructor(props) {
 	  super(props);
 	var ds = new ListView.DataSource({
@@ -39,7 +39,7 @@ var ScreenHeight = Dimensions.get('window').height;
 		});
 		var that = this; 
 		// var url ="http://139.199.102.73:8080/api/news/search/?title="+this.state.keywords 
-		var url ="http://139.199.102.73:8080/api/news/latest"
+		var url ="http://39.106.168.133:8080/api/news/latest"
 		Util.getRequest(url,function(data){
 				if(!data || data.length==0)
 				{
@@ -99,7 +99,7 @@ var ScreenHeight = Dimensions.get('window').height;
 									(book)=><News_Item 
 												book={book}  
 												onPress={()=>{
-					 								this.props.navigation.navigate('Profile',{bookID:book.id})
+					 								this.props.navigation.navigate('Profile',{bookID:book.title})
 					 							}
 					 						}/>
 								}

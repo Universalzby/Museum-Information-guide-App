@@ -26,7 +26,7 @@ import Comments from './../Comments/show_comment'
 	getData(){
 		var that = this; 
 		const {params} = this.props.navigation.state;
-		var url = "http://139.199.102.73:8080/api/news/" + params.bookID;
+		var url = "http://39.106.168.133:8080/api/news/search?title=" + params.bookID;
 		Util.getRequest(url,function(data){
 			that.setState({
 				bookData:data

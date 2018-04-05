@@ -18,23 +18,34 @@ export default class App extends Component<Props> {
     super(props);
   
     this.state = {
-        tab:"用户",
+        Height:60,
+        tab:"博物馆",
         value:"old",
         user:"",
-        statement:""
+        statement:"",
     };
+    global.username="";
+    global.statement="";
+  }
+  _one(){
+      this.setState({tab:'博物馆'})
   }
   render() {
     return (
       <TabNavigator  
-          tabBarStyle={{height:60}}  
-          style={{flex:1}}>  
+          tabBarStyle={this.state.Height}  
+          style={{flex:1}}
+          tabBarStyle={{  
+                backgroundColor:'#dcdcdc',  
+                height:this.state.Height, 
+            }} 
+          >  
           <TabNavigator.Item  
               title="博物馆"  
               selected={this.state.tab==='博物馆'}  
-              onPress={()=>this.setState({tab:'博物馆'})}
+              onPress={()=>this._one()}
               renderIcon={()=><Image  
-                    style={{width:60,height:40}}  
+                    style={{width:60,height:this.state.Height/2}}  
                     source={require('./Image/hourse.png')}></Image>}  
           >      
           <Museum_Home_list 
@@ -49,7 +60,7 @@ export default class App extends Component<Props> {
               this.setState({tab:'新闻消息'});
               }}  
               renderIcon={()=><Image  
-                    style={{width:35,height:27}}  
+                    style={{width:35,height:this.state.Height/2}}  
                     source={require('./Image/news.png')}></Image>}
           >  
           <News_Home_list
@@ -66,7 +77,7 @@ export default class App extends Component<Props> {
               this.setState({tab:'用户'});
               }} 
               renderIcon={()=><Image  
-                    style={{width:35,height:27}}  
+                    style={{width:35,height:this.state.Height/2+5}}  
                     source={require('./Image/my.png')}></Image>}  
           >  
           <User

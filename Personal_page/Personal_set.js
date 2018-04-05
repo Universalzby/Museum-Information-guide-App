@@ -45,7 +45,7 @@ export default class Personal_sets extends Component {
                         >
                             <Text style={styles.Text_}>
                                 取消
-                    </Text>
+                            </Text>
                         </TouchableOpacity>
                     </View>
                     <View style={[styles.common, { width: ScreenWidth * 3 / 5, height: ScreenHeight / 12 }]}>

@@ -33,13 +33,16 @@ class User extends Component { //<Props>
 	  super(props);
 	
 	  this.state = {
-	  		statement:true,
-	  		name:"wuli淘淘",
+	  		statement:false,
+	  		name:"",
 	  };
-	  global.username="";
-	  global.statement=false;
+	  
 	}
-		
+	componentWillMount()
+	{
+		global.statement = false;
+		this.setState({statement:false})
+	}
 	_coments(){
 		if(this.state.statement == false)
 			this.props.navigation.navigate('Profile');
@@ -53,10 +56,10 @@ class User extends Component { //<Props>
 			this.props.navigation.navigate('MyLike',{name:this.state.name});
 	}
 	_exit(){
-		this.setState({statement:false})
 		global.statement = false;
 		global.username="";
-		
+		this.setState({statement:false})
+		this.componentWillMount()
 	}
 	_s(){
 		if (this.state.statement == false)

@@ -17,7 +17,7 @@ import Register from './register.js';
 var Dimensions = require('Dimensions');
 var ScreenWidth = Dimensions.get('window').width;
 var ScreenHeight = Dimensions.get('window').height;
-export default class Login extends Component<Props> {
+export default class Login extends Component {
     constructor(props) {
       super(props);
       this.state = {

@@ -34,7 +34,7 @@ export default class Login extends Component {
         let formData = new FormData();  
         formData.append("loginname",this.state.name);  
         formData.append("password",this.state.pwd);  
-        let url = "http://139.199.102.73:8080/api/user/login"
+        let url = "http://39.106.168.133:8080/api/user/login"
         fetch(url , {  
            method: 'POST',  
            headers: {},  
@@ -60,8 +60,8 @@ export default class Login extends Component {
         {
             global.username = this.state.name
             global.statement = true;
-            state.params.callBack(this.state.name) //回调传值
-            goBack() //点击POP上一个页面得方法  this.props.navigation.goBack();
+            state.params.callBack(this.state.name) //回调传值 
+            this.props.navigation.goBack(); //点击POP上一个页面得方法  this.props.navigation.goBack();
         }
     }
     render(){
