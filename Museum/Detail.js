@@ -62,13 +62,13 @@ class Detail extends Component {
         alert("新闻");
     }
     _user(){
-        if(global.statement == false)
-            alert("请登录!")
-        else{
+        // if(global.statement == false)
+        //     alert("请登录!")
+        // else{
             this.props.navigation.navigate('comment', {
                 data: this.state.bookData,
             });
-        }
+        // }
     }
     render() {
         const { navigate } = this.props.navigation;
@@ -102,7 +102,7 @@ class Detail extends Component {
                                     >
                                         <ImageBackground
                                             style={[styles.common, styles.block]}
-                                            source={require('./../Image/bgm_museum.jpg')}
+                                            source={require('./../Image/bgm_museum1.jpg')}
                                         >
                                             <View style={[styles.common, styles.block, { backgroundColor: "black", opacity: 0.5 }]}>
                                                 <Text style={styles.text}>
@@ -118,7 +118,7 @@ class Detail extends Component {
                                     >
                                         <ImageBackground
                                             style={[styles.common, styles.block]}
-                                            source={require('./../Image/bgm_exhibit.jpg')}
+                                            source={require('./../Image/bgm_exhibit1.jpg')}
                                         >
                                             <View style={[styles.common, styles.block, { backgroundColor: "black", opacity: 0.5 }]}>
                                                 <Text style={styles.text}>
@@ -134,7 +134,7 @@ class Detail extends Component {
                                     >
                                         <ImageBackground
                                             style={[styles.common, styles.block]}
-                                            source={require('./../Image/bgm.jpg')}
+                                            source={require('./../Image/bgm_news.jpg')}
                                         >
                                             <View style={[styles.common, styles.block, { backgroundColor: "black", opacity: 0.5 }]}>
                                                 <Text style={styles.text}>
@@ -150,7 +150,7 @@ class Detail extends Component {
                                     >
                                         <ImageBackground
                                             style={[styles.common, styles.block]}
-                                            source={require('./../Image/user.jpg')}
+                                            source={require('./../Image/bgm_usr.jpg')}
                                         >
                                             <View style={[styles.common, styles.block, { backgroundColor: "black", opacity: 0.5 }]}>
                                                 <Text style={styles.text}>  

@@ -26,14 +26,35 @@ export default class App extends Component<Props> {
     };
     global.username="";
     global.statement="";
+    global.id=null;
+    _this = this;
   }
   _one(){
       this.setState({tab:'博物馆'})
   }
+  _onPress(data){
+        var height = _this.state.Height;
+        var height = 0;
+        if(data){
+            height = 60;
+        }else{
+            height = 0;
+        }
+
+        _this.setState({
+            Height:height
+        });
+    }
   render() {
     return (
       <TabNavigator  
-          tabBarStyle={this.state.Height}  
+            sceneStyle={{
+                paddingBottom:this.state.Height
+            }}
+            tabBarStyle={{
+                height:this.state.Height,
+                overflow:'hidden'
+            }}
           style={{flex:1}}
           tabBarStyle={{  
                 backgroundColor:'#dcdcdc',  
@@ -81,7 +102,7 @@ export default class App extends Component<Props> {
                     source={require('./Image/my.png')}></Image>}  
           >  
           <User
-
+            op={this._onPress}
           />
           
         </TabNavigator.Item>  

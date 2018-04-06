@@ -62,6 +62,7 @@ class User extends Component { //<Props>
 		this.componentWillMount()
 	}
 	_s(){
+		// this.props.op.bind('',false)
 		if (this.state.statement == false)
 			alert('请先登录');
 		else
@@ -220,7 +221,7 @@ class User extends Component { //<Props>
 								</View>
 							</View>
 
-							<View style={[ { height: 13 }]}></View>
+							<View style={[ { height: 19 }]}></View>
 
 							<View style={[styles.func, { backgroundColor: "#e0ffff" }]}>
 								<View style={{ left: 0 }}>
@@ -296,7 +297,7 @@ class User extends Component { //<Props>
 								:
 								<View style={{ height: 50, justifyContent: "center", alignItems: "center",}}>
 									<Text style={{ fontSize: 25,}}>
-										登录后精彩更多！！！
+										请登录！！！
 									</Text>
 								</View>
 							}

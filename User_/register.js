@@ -33,7 +33,7 @@ export default class Login extends Component {
         let formData = new FormData();  
         formData.append("loginname",this.state.name);  
         formData.append("password",this.state.pwd);  
-        let url = "http://139.199.102.73:8080/api/user/reg/"
+        let url = "http://39.106.168.133:8080/api/user/reg"
         fetch(url , {  
            method: 'POST',  
            headers: {},  

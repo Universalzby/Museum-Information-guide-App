@@ -47,6 +47,7 @@ export default class Login extends Component {
         }})
         .then((json) => {  
           this.setState({data:json});
+            // var str = json.toJSONString();
           alert(json.msg);
 
         })
@@ -58,8 +59,9 @@ export default class Login extends Component {
         this._getData();
         if(this.state.data.valid == 1)
         {
-            global.username = this.state.name
+            global.username = this.state.data.loginname;
             global.statement = true;
+            global.id = this.state.data.id;
             state.params.callBack(this.state.name) //回调传值 
             this.props.navigation.goBack(); //点击POP上一个页面得方法  this.props.navigation.goBack();
         }

@@ -21,6 +21,7 @@ import News_Item from './Museum_Item.js';
 import Util from './../News/Util';
 import Detail from './Detail';
 import User_comment from './comment.js';
+import My_comment from './my_comment.js';
 var Dimensions = require('Dimensions');
 var ScreenWidth = Dimensions.get('window').width;
 var ScreenHeight = Dimensions.get('window').height;
@@ -77,7 +78,7 @@ class Home_list extends Component {
 					>
 						<View style={{}}>
 							<View style={[{}, { flexDirection: "row", height: ScreenHeight / 10, width: ScreenWidth, }]}>
-								<View style={{ alignItems: 'center', borderWidth: 1, borderRadius: 10, },{margin: 10,flexDirection:"row",width:ScreenWidth/1.2,}}>
+								<View style={{ alignItems: 'center', borderWidth: 1, borderRadius: 10, } , {margin: 10,flexDirection:"row",width:ScreenWidth/1.2,}}>
 									<TouchableOpacity
 											onPress={() => this._search()}
 											onChangeText={(text) => this.setState({ keywords: text })}
@@ -101,7 +102,8 @@ class Home_list extends Component {
 								this.state.show ?
 									<ListView
 										dataSource={this.state.dataSource}
-										initialListSize={20}
+										initialListSize={10}
+										contentContainerStyle={styles.contentViewStyle}
 										renderRow={
 											(book) => <News_Item
 												book={book}
@@ -111,12 +113,12 @@ class Home_list extends Component {
 													}
 												)}}/>
 										}
-										renderSeperator={()=>this._renderSeperator()}
+										renderSeperator={this._renderSeperator}
 									/>
 									: Util.loading
 							}
 						</View>
-					</ImageBackground>
+					</ImageBackground> 
 				</View>
 			</ScrollView >
 		);
@@ -137,6 +139,12 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
+	contentViewStyle: {
+        // 主轴方向
+        flexDirection:'row',
+        // 换行
+        flexWrap:'wrap'
+    },
 
 });
 
@@ -178,7 +186,13 @@ const ModalStack = StackNavigator({
 			headerTitle: '',
 
 		}
+	},
+	my_comment:{
+		screen: My_comment,
+		navigationOptions: {
+			headerTitle: '',
+			header:null
+		}
 	}
-
 });
 export default ModalStack;
