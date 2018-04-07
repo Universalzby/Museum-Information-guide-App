@@ -48,7 +48,7 @@ class Home_list extends Component {
 		});
 		var that = this;
 		// var url ="http://139.199.102.73:8080/api/news/search/?title="+this.state.keywords 
-		var url = "http://39.106.168.133:8080/api/museum/search?name=博物馆"
+		var url = "http://39.106.168.133:8080/api/museum/search?name=馆"
 		Util.getRequest(url, function (data) {
 			if (!data || data.length == 0) {
 				return alert("未查询到相关信息")
@@ -102,7 +102,7 @@ class Home_list extends Component {
 								this.state.show ?
 									<ListView
 										dataSource={this.state.dataSource}
-										initialListSize={10}
+// 0										initialListSize={10}
 										contentContainerStyle={styles.contentViewStyle}
 										renderRow={
 											(book) => <News_Item

@@ -13,7 +13,7 @@ import TabNavigator from 'react-native-tab-navigator';
 import User from './User_/User';
 import Museum_Home_list from './Museum/home_list';
 import News_Home_list from './News/home_list';
-export default class App extends Component<Props> {
+export default class App extends Component {
   constructor(props) {
     super(props);
   

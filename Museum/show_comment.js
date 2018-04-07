@@ -27,16 +27,61 @@ export default class Show extends Component {
             },
         };
     }
+//     <Text>
+//          {this.state.data[i].loginname}{this.state.data[i].time}{this.state.data[i].content}
+//     </Text>
     _renderBody(){
         let len = this.state.data.length;
         let Comments = [];
         for(var i = 0;i<len;i++){
             Comments.push(
-                <View style={styles.container} key={"i" + i}>
-                    <View style={{}}>
+                <View style={[styles.container,{paddingLeft :15,paddingRight:15 ,}]} key={"i" + i}>
+                    <View style={{height:30,flexDirection: 'row',}}>
+                        <Image
+                            source={require('./../Image/head.png')}
+                        />
                         <Text>
-                            {this.state.data[i].loginname}{this.state.data[i].time}{this.state.data[i].content}
+                            {this.state.data[i].loginname}
                         </Text>
+                    </View>
+                    <View style={{ height: 60}}>
+                        <Text>
+                            {this.state.data[i].content}
+                        </Text>
+                    </View>
+                    <View style={{ height: 50,flexDirection: 'row', width:ScreenWidth}}>
+                        <View style={{ width: ScreenWidth/2}}>
+                            <Text>
+                                {this.state.data[i].time}
+                            </Text>
+                        </View>
+                        <View style={{ width: ScreenWidth / 2 ,flexDirection: 'row',}}>
+                            <TouchableOpacity
+                                // onPress={() => this._introduction()}
+                            >
+                                <ImageBackground
+                                    style={[styles.common, {width:20,height:20}]}
+                                    source={require('./../Image/agree.png')}
+                                >
+                                </ImageBackground>
+                            </TouchableOpacity>
+                            <Text>
+                                178
+                            </Text>
+                            <TouchableOpacity
+                                style={{marginLeft: 15,}}
+                                // onPress={() => this._introduction()}
+                            >
+                                <ImageBackground
+                                    style={[styles.common, { width: 20, height: 20 }]}
+                                    source={require('./../Image/other_com.png')}
+                                >
+                                </ImageBackground>
+                            </TouchableOpacity>
+                            <Text>
+                                8
+                            </Text>
+                        </View>
                     </View>
                 </View>
             );

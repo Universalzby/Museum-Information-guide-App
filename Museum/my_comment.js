@@ -14,6 +14,7 @@ import {
     ScrollView,
     TextInput
 } from 'react-native';
+import RNRestart from 'react-native-restart';
 import StarScore from './star.js';
 import { StackNavigator } from 'react-navigation';
 import Icon from './../User_/Icon_Back.js'
@@ -61,7 +62,8 @@ export default class Comment extends Component {
     }
     _submit(){
         alert("成功提交")
-        this._getdata()
+        this._getdata();
+        RNRestart.Restart();
     }
     _clear(){
         alert("清空")
@@ -194,7 +196,7 @@ export default class Comment extends Component {
         formData.append("museum_id", params.id_museum);
         formData.append("content", this.state.texts);
         formData.append("user_id", global.id);
-        let url = "http://39.106.168.133:8080/api/comment"
+        let url = "http://39.106.168.133:8080/api/comments" 
         fetch(url, {
             method: 'POST',
             headers: {},
@@ -208,7 +210,7 @@ export default class Comment extends Component {
             })
             .then((json) => {
                 this.setState({ data: json });
-                // alert(json.msg);
+                alert(json);
 
             })
             .catch((error) => {

@@ -60,6 +60,9 @@ class Detail extends Component {
     }
     _news(){
         alert("新闻");
+        this.props.navigation.navigate('news', {
+            data: this.state.bookData,
+        });
     }
     _user(){
         // if(global.statement == false)
