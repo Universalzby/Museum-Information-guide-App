@@ -26,11 +26,13 @@ import Comments from './../Comments/show_comment'
 	getData(){
 		var that = this; 
 		const {params} = this.props.navigation.state;
+		// alert(params.bookID)
 		var url = "http://39.106.168.133:8080/api/news/search?title=" + params.bookID;
 		Util.getRequest(url,function(data){
 			that.setState({
 				bookData:data
 			})
+			// alert(JSON.stringify(that.state.bookData))
 		},function(error){
 			alert(error);
 		}) 
@@ -41,28 +43,15 @@ import Comments from './../Comments/show_comment'
 				{
 					this.state.bookData?
 						<View>
-							
-							<Item book = {this.state.bookData}/>
+							<Item book = {this.state.bookData[0]}/>
+							<View>
+								<Text style={styles.title}>摘要</Text>
+								<Text style={styles.text}>{this.state.bookData[0].excerpt}</Text>
+							</View>	
 							<View>
 								<Text style={styles.title}>正文</Text>
-								<Text style={styles.text}>{this.state.bookData.content}</Text>
-							</View>
-							<View style={{marginTop:10}}>
-								<Text style={styles.title}>评论</Text>
-								<Text style={styles.text}>用户:{global.username}</Text>
-							</View>
-							{
-								global.statement==false?
-									<View style={styles.common}>
-										<Text>
-											登录查看评论
-										</Text>
-									</View>
-									:
-									<Comments/>
-							}
-							<View style={{height:55}}>
-							</View>
+								<Text style={styles.text}>{this.state.bookData[0].content}</Text>
+							</View>	
 						</View>
 					:Util.loading
 				}

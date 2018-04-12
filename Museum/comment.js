@@ -32,6 +32,9 @@ export default class Comment extends Component {
             ],
             cnt_man:807289,
             ave_score:9.1,
+            data:{
+
+            },
         };
     }
     _myview(){
@@ -57,12 +60,12 @@ export default class Comment extends Component {
                         </View>
                         <View style={{ width: ScreenWidth * 11 / 36, height: 150/2,justifyContent:"center",alignItems:"center" }}>
                             <Text style={{fontSize: 40,fontWeight: 'bold',color:"black"}}>
-                                9.1
+                                {this.state.data.avg}
                             </Text>
                         </View>
                         <View style={{flexDirection: 'row', width: ScreenWidth * 11 / 36, height: 150 / 4, justifyContent: "center", alignItems: "center"  }}>
                             <Text style={{ fontSize: 15, }}>
-                                807,289人
+                                {this.state.data.comment_count}人
                             </Text>
                             <TouchableOpacity
                                 style={{marginLeft: 5,}}
@@ -75,7 +78,6 @@ export default class Comment extends Component {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    
                     <View style={{ width: ScreenWidth * 22 / 36, height: 150, }}>
                         <View style={{ flexDirection:"row-reverse",width: ScreenWidth * 22 / 36, height: 150/2.5, }}>
                             <View style={[styles.bnt_comment,{}]}>
@@ -84,7 +86,7 @@ export default class Comment extends Component {
 									onPress={()=>this._myview()}
 								>
 									<Text style={{color:"white",fontSize:15,fontWeight: 'bold',}}>
-										写评论{global.id}
+										写评论{/*global.id*/}
 									</Text>
 								</TouchableOpacity>
 							</View>
@@ -95,19 +97,19 @@ export default class Comment extends Component {
                                     <Text>
                                         展览评分:
                                     </Text>
-                                    <Little_star value={this.state.star[0]}/>
+                                    <Little_star value={this.state.data.exhibition_star}/>
                                 </View>
                                 <View style={{ flexDirection: 'row', height: (150 - 150 / 2.5) / 3, width: ScreenWidth * 22 / 36 - 60,   alignItems: "center",}}>
                                     <Text>
                                         服务评分:
                                     </Text>
-                                    <Little_star value={this.state.star[1]}/>
+                                    <Little_star value={this.state.data.service_star}/>
                                 </View>
                                 <View style={{ flexDirection: 'row', height: (150 - 150 / 2.5) / 3, width: ScreenWidth * 22 / 36 - 60,   alignItems: "center",}}>
-                                    <Text>
+                                    <Text>      
                                         环境评分:
                                     </Text>
-                                    <Little_star value={this.state.star[2]}/>
+                                    <Little_star value={this.state.data.environment_star}/>
                                 </View>
                             </View>    
                         </View>
@@ -115,7 +117,6 @@ export default class Comment extends Component {
                 </View>
                     
             </View>
-            
                 <Show id={params.data.id} />  
             </ScrollView>
 
@@ -123,6 +124,31 @@ export default class Comment extends Component {
     }
         componentDidMount() {
             this.setState({names:global.username});
+            this._getdata();
+    }
+    _getdata(){
+        const { params } = this.props.navigation.state;
+        let s = params.data.id
+        // alert(s);
+        let formData = new FormData();
+        // formData.append("user_id", 7);
+        let url = "http://39.106.168.133:8080/api/getstar/" + s;
+        fetch(url, {
+            method: 'GET',
+        }
+        )
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                }
+            })
+            .then((json) => {
+                this.setState({ data: json });
+                // alert(json[0].loginname)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
 }
 var styles = StyleSheet.create({

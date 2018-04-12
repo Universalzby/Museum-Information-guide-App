@@ -34,7 +34,7 @@ class Home_list extends Component {
 		this.state = {
 			show: false,
 			dataSource: ds,
-			keywords: "故宫博物院",
+			keywords: "博物馆",
 			statement:global.statement,
 		};
 		
@@ -61,6 +61,7 @@ class Home_list extends Component {
 				show: true,
 				dataSource: ds.cloneWithRows(data)
 			})
+			// alert(JSON.stringify(that.state.dataSource))
 		}, function (error) {
 			alert(error);
 		})
@@ -70,7 +71,7 @@ class Home_list extends Component {
 	}
 	render() {
 		return (
-			<ScrollView>
+		
 				<View style={{ flexDirection: "row", }}>
 					<ImageBackground
 						style={{ width: ScreenWidth, height: ScreenHeight }}
@@ -102,33 +103,35 @@ class Home_list extends Component {
 								this.state.show ?
 									<ListView
 										dataSource={this.state.dataSource}
-// 0										initialListSize={10}
+										// initialListSize={5}
 										contentContainerStyle={styles.contentViewStyle}
 										renderRow={
 											(book) => <News_Item
 												book={book}
 												onPress={() => {
-													this.props.navigation.navigate('Profile', { 
-															bookID: book.id, 
+													this.props.navigation.navigate('Profile', {
+														bookID: book.id,
 													}
-												)}}/>
+													)
+												}} />
 										}
 										renderSeperator={this._renderSeperator}
 									/>
+									
 									: Util.loading
 							}
 						</View>
 					</ImageBackground> 
 				</View>
-			</ScrollView >
+		
 		);
 	}
-	_renderSeperator(sectionID: number, rowID: number) {
+	_renderSeperator(sectionID, rowID) {
 		var style = {
 			height: 3,
-			backgroundColor: "red"
+			backgroundColor: "black"
 		}
-		return <View style={style} key={sectionID + rowID} />
+		return <View style={style} key={sectionID + rowID} ></View>
 	}
 	componentDidMount() {
 		this.getData();

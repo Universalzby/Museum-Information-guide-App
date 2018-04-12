@@ -13,6 +13,7 @@ import {
     ImageBackground,
     ScrollView
 } from 'react-native';
+import Star from './liitle_star.js';
 var Dimensions = require('Dimensions');
 var ScreenWidth = Dimensions.get('window').width;
 var ScreenHeight = Dimensions.get('window').height;
@@ -25,13 +26,22 @@ export default class Show extends Component {
             data:{
                 
             },
+            // avg_allscore:0,
+            // sum_people:0,
+            // avg_score0:0,
+            // avg_score1: 0,
+            // avg_score2: 0,
         };
     }
 //     <Text>
 //          {this.state.data[i].loginname}{this.state.data[i].time}{this.state.data[i].content}
-//     </Text>
+//     </Text>  
+    _getScore(x){
+        return (x.exhibition_star + x.service_star + x.environment_star) / 3
+    }
     _renderBody(){
         let len = this.state.data.length;
+        // let score0 = 0,score1 = 0,score2 = 0,sum = 0;
         let Comments = [];
         for(var i = 0;i<len;i++){
             Comments.push(
@@ -43,6 +53,7 @@ export default class Show extends Component {
                         <Text>
                             {this.state.data[i].loginname}
                         </Text>
+                        <Star value={this._getScore(this.state.data[i])} />
                     </View>
                     <View style={{ height: 60}}>
                         <Text>
@@ -86,6 +97,13 @@ export default class Show extends Component {
                 </View>
             );
         }
+        // this.setState({
+        //     avg_allscore: 0,
+        //     sum_people: len,
+        //     avg_score0: 0,
+        //     avg_score1: 0,
+        //     avg_score2: 0,
+        // });
         return Comments;
     }
     render(){
@@ -98,6 +116,7 @@ export default class Show extends Component {
     _getdata() {
         let s = this.state.id;
         let formData = new FormData();
+        // alert(s)
         // formData.append("user_id", 7);
         let url = "http://39.106.168.133:8080/api/comments/museum/" +s; 
         fetch(url, {

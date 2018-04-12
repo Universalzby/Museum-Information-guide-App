@@ -65,13 +65,13 @@ class Detail extends Component {
         });
     }
     _user(){
-        // if(global.statement == false)
-        //     alert("请登录!")
-        // else{
+        if(global.statement == false)
+            alert("请登录!")
+        else{
             this.props.navigation.navigate('comment', {
                 data: this.state.bookData,
             });
-        // }
+        }
     }
     render() {
         const { navigate } = this.props.navigation;

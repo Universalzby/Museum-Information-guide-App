@@ -45,13 +45,13 @@ class User extends Component { //<Props>
 	}
 	_coments(){
 		if(this.state.statement == false)
-			this.props.navigation.navigate('Profile');
+			this.props.navigation.navigate('Profile',{ callBack: (data) => { this.setState({ name: data, statement: true }) } });
 		else
 			this.props.navigation.navigate('Comment',{name:this.state.name});
 	}
 	_likes(){
 		if(this.state.statement == false)
-			this.props.navigation.navigate('Profile');
+			this.props.navigation.navigate('Profile', { callBack: (data) => { this.setState({ name: data, statement: true }) } });
 		else
 			this.props.navigation.navigate('MyLike',{name:this.state.name});
 	}
@@ -132,7 +132,7 @@ class User extends Component { //<Props>
 
 						<View style={[ { height: 10 }]}></View>
 						
-						<View style={{height:ScreenHeight/2,backgroundColor:"silver"}}>
+						<View style={{ height: ScreenHeight / 2, backgroundColor:"#E0F0FF"}}>
 							<View style={[styles.func, { backgroundColor: "#e0ffff" }]}>
 								<View style={{ left: 0 }}>
 									<TouchableOpacity
@@ -221,7 +221,7 @@ class User extends Component { //<Props>
 								</View>
 							</View>
 
-							<View style={[ { height: 19 }]}></View>
+							<View style={[ { height: 15 ,backgroundColor:"#E0F0FF"}]}	></View>
 
 							<View style={[styles.func, { backgroundColor: "#e0ffff" }]}>
 								<View style={{ left: 0 }}>

@@ -56,6 +56,6 @@ export default class little_star extends Component {
             );
         }
     }
-
+    
 
 }  

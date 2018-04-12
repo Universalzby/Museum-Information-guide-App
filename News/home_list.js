@@ -62,7 +62,7 @@ var ScreenHeight = Dimensions.get('window').height;
 	}
 	render(){
 		return(
-		<ScrollView>
+		
 			<View style={{flexDirection:"row",}}>
 				<ImageBackground
 					style={{width:ScreenWidth,height:ScreenHeight}}
@@ -110,15 +110,15 @@ var ScreenHeight = Dimensions.get('window').height;
 					</View>
 				</ImageBackground>
 			</View>
-		</ScrollView>
+		
 		);
 	}
-	_renderSeperator(sectionID:number,rowID:number){
+	_renderSeperator(sectionID,rowID){
 		var style={
 			height:1,
 			backgroundColor:"#CCCCCC"
 		}
-		return <View style={style} key={sectionID+rowID}/>
+		return <View style={style} key={sectionID+rowID}></View>
 	}
 	componentDidMount(){
 		this.getData();

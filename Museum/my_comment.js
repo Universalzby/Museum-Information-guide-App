@@ -14,7 +14,7 @@ import {
     ScrollView,
     TextInput
 } from 'react-native';
-import RNRestart from 'react-native-restart';
+// import RNRestart from 'react-native-restart';
 import StarScore from './star.js';
 import { StackNavigator } from 'react-navigation';
 import Icon from './../User_/Icon_Back.js'
@@ -25,9 +25,8 @@ var ScreenHeight = Dimensions.get('window').height;
 export default class Comment extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            texts:"",
+            texts:"dwadaw",
             names: null,
             Score0: 0,
             Score1: 0,
@@ -63,7 +62,8 @@ export default class Comment extends Component {
     _submit(){
         alert("成功提交")
         this._getdata();
-        RNRestart.Restart();
+        // this.props.navigation.goBack();
+        // RNRestart.Restart();
     }
     _clear(){
         alert("清空")
@@ -192,11 +192,15 @@ export default class Comment extends Component {
     _getdata() {
         const { params } = this.props.navigation.state;
         let formData = new FormData();
+        alert(global.id)
         formData.append("coption", 1);
-        formData.append("museum_id", params.id_museum);
-        formData.append("content", this.state.texts);
         formData.append("user_id", global.id);
-        let url = "http://39.106.168.133:8080/api/comments" 
+        formData.append("content", this.state.texts);
+        formData.append("museum_id", params.id_museum);
+        formData.append("exhibition_star", this.state.Score0);
+        formData.append("service_star", this.state.Score1);
+        formData.append("environment_star", this.state.Score1);
+        let url = "http://39.106.168.133:8080/api/commentandstar";
         fetch(url, {
             method: 'POST',
             headers: {},
@@ -210,7 +214,7 @@ export default class Comment extends Component {
             })
             .then((json) => {
                 this.setState({ data: json });
-                alert(json);
+                alert(json.msg);
 
             })
             .catch((error) => {
