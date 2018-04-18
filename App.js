@@ -70,7 +70,7 @@ export default class App extends Component {
                     source={require('./Image/hourse.png')}></Image>}  
           >      
           <Museum_Home_list 
-              
+
           />
           </TabNavigator.Item>  
 

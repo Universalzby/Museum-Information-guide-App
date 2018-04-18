@@ -25,6 +25,7 @@ export default class Comment extends Component {
         super(props);
 
         this.state = {
+            flush:1,
             names:null,
             currentScore:null,
             star:[
@@ -39,11 +40,21 @@ export default class Comment extends Component {
     }
     _myview(){
         // alert("我也参与")
+        
+        let flushs = this.state.flush
+        alert(flushs)
         const { params } = this.props.navigation.state;
         this.props.navigation.navigate('my_comment', {
             username:global.username,
             id_museum:params.data.id,
             name_museum:params.data.name,
+            callBack: () => {
+                this.setState({
+                    flush:flushs+1
+                })
+                // this.componentDidMount()
+                // this.forceUpdate()
+            }
         });
     }
     render(){
@@ -117,7 +128,7 @@ export default class Comment extends Component {
                 </View>
                     
             </View>
-                <Show id={params.data.id} />  
+                <Show id={params.data.id} state={this.state.flush}/>  
             </ScrollView>
 
       );

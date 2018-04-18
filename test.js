@@ -1,107 +1,128 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
+    AppRegistry,
     StyleSheet,
-    View,
-    Image,
-    Dimensions,
-    TouchableOpacity,
     Text,
-    ImageBackground
+    View,
+    PixelRatio,
+    TouchableOpacity,
+    Image,
 } from 'react-native';
 
-const bottomGutter = 24, marginSize = 2
-const width = Dimensions.get('window').width
-const height = Dimensions.get('window').height - bottomGutter
+import ImagePicker from 'react-native-image-picker';
 
-const ImageElement = (props) => (
-    <ImageBackground
-        style={styles.image}
-        source={{ uri: props.imageUrl }}
-    >
-        {props.children}
-    </ImageBackground>
-)
+export default class App extends React.Component {
 
-const Button = (props) => (
-    <TouchableOpacity
-        style={[styles.button, props.style]}
-        onPress={props.onPress}
-    >
-        <Text style={styles.buttonText}>{props.text}</Text>
-    </TouchableOpacity>
-)
+    state = {
+        avatarSource: null,
+        videoSource: null
+    };
 
-export default class App extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            images: [
-                'http://image.tupian114.com/20120914/2012091414332468.jpg',
-                'http://image.tupian114.com/20151022/09000242.jpg',
-                'http://image.tupian114.com/20151022/15470122.jpg',
-                'http://image.tupian114.com/20151022/12180189.jpg',
-                'http://image.tupian114.com/20130521/12195885.jpg',
-                'http://image.tupian114.com/20120416/2012041623480305.jpg',
-                'http://image.tupian114.com/20120416/2012041623475405.jpg',
-                'http://image.tupian114.com/20120728/2012072822242495.jpg',
-            ],
-            current: 2
-        }
+    selectPhotoTapped() {
+        const options = {
+            quality: 1.0,
+            maxWidth: 500,
+            maxHeight: 500,
+            storageOptions: {
+                skipBackup: true
+            }
+        };
+
+        ImagePicker.showImagePicker(options, (response) => {
+            console.log('Response = ', response);
+
+            if (response.didCancel) {
+                console.log('User cancelled photo picker');
+            }
+            else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            }
+            else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            }
+            else {
+                let source = { uri: response.uri };
+
+                // You can also display the image using data:
+                // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+                this.setState({
+                    avatarSource: source
+                });
+            }
+        });
     }
-    goLeft = () => {
-        this.setState({
-            current: this.state.current === 0 ? this.state.images.length - 1 : this.state.current - 1
-        })
+
+    selectVideoTapped() {
+        const options = {
+            title: 'Video Picker',
+            takePhotoButtonTitle: 'Take Video...',
+            mediaType: 'video',
+            videoQuality: 'medium'
+        };
+
+        ImagePicker.showImagePicker(options, (response) => {
+            console.log('Response = ', response);
+
+            if (response.didCancel) {
+                console.log('User cancelled video picker');
+            }
+            else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            }
+            else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            }
+            else {
+                this.setState({
+                    videoSource: response.uri
+                });
+            }
+        });
     }
-    goRight = () => {
-        this.setState({
-            current: this.state.current === this.state.images.length - 1 ? 0 : this.state.current + 1
-        })
-    }
+
     render() {
-        const image = this.state.images[this.state.current]
         return (
-
             <View style={styles.container}>
-                <ImageElement imageUrl={this.state.images[this.state.current]}>
-                    <Button
-                        text="<"
-                        style={{ left: 0 }}
-                        onPress={this.goLeft}
-                    />
-                    <Button
-                        text=">"
-                        style={{ right: 0 }}
-                        onPress={this.goRight}
-                    />
-                </ImageElement>
+                <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
+                    <View style={[styles.avatar, styles.avatarContainer, { marginBottom: 20 }]}>
+                        {this.state.avatarSource === null ? <Text>Select a Photo</Text> :
+                            <Image style={styles.avatar} source={this.state.avatarSource} />
+                        }
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={this.selectVideoTapped.bind(this)}>
+                    <View style={[styles.avatar, styles.avatarContainer]}>
+                        <Text>Select a Video</Text>
+                    </View>
+                </TouchableOpacity>
+
+                {this.state.videoSource &&
+                    <Text style={{ margin: 8, textAlign: 'center' }}>{this.state.videoSource}</Text>
+                }
             </View>
         );
     }
+
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-    image: {
-        width: width - (2 * marginSize),
-        height: height - (2 * marginSize),
-        margin: marginSize,
-    },
-    button: {
-        backgroundColor: 'rgba(150,150,150,0.5)',
-        position: 'absolute',
-        width: width / 10,
-        height: height / 10,
-        top: height / 2 - height / 10,
-        margin: 5,
-        alignItems: 'center',
         justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF'
     },
-    buttonText: {
-        color: 'white',
-        fontSize: 30,
-        fontWeight: 'bold',
-
+    avatarContainer: {
+        borderColor: '#9B9B9B',
+        borderWidth: 1 / PixelRatio.get(),
+        justifyContent: 'center',
+        alignItems: 'center'
     },
+    avatar: {
+        borderRadius: 75,
+        width: 150,
+        height: 150
+    }
 });

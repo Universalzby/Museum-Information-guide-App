@@ -42,13 +42,13 @@ class Home_list extends Component {
 	componentWillUpdate(){
 		// this.state.statement = global.statement;
 	}
-	getData() {
+	getData(args) {
 		this.setState({
 			show: false
 		});
 		var that = this;
 		// var url ="http://139.199.102.73:8080/api/news/search/?title="+this.state.keywords 
-		var url = "http://39.106.168.133:8080/api/museum/search?name=馆"
+		var url = "http://39.106.168.133:8080/api/museum/search?name="+args 
 		Util.getRequest(url, function (data) {
 			if (!data || data.length == 0) {
 				return alert("未查询到相关信息")
@@ -81,19 +81,23 @@ class Home_list extends Component {
 							<View style={[{}, { flexDirection: "row", height: ScreenHeight / 10, width: ScreenWidth, }]}>
 								<View style={{ alignItems: 'center', borderWidth: 1, borderRadius: 10, } , {margin: 10,flexDirection:"row",width:ScreenWidth/1.2,}}>
 									<TouchableOpacity
-											onPress={() => this._search()}
-											onChangeText={(text) => this.setState({ keywords: text })}
+											onPress={()=>this.getData(this.state.keywords)}
+											// onChangeText={(text) => this.setState({ keywords: text })}
 										// dataDetectorTypes={dall}
-									>
+									>	
 										<Image
 											source={require('./../Image/search.png')}
 											style={{ margin: 10, }}
 										/>
 									</TouchableOpacity>
 									<SearchBar
-										placeholder="输入新闻信息"
+										placeholder="输入博物馆名称"
 										onPress={() => this._searchPress(this.state.keywords)}
-									// onChangeText={(text) => this._changeText(text)}	
+										onChangeText={(text) =>{
+											this.setState({
+												keywords:text
+											})
+										}}	
 									/>
 								</View>
 							</View>
@@ -134,7 +138,7 @@ class Home_list extends Component {
 		return <View style={style} key={sectionID + rowID} ></View>
 	}
 	componentDidMount() {
-		this.getData();
+		this.getData("馆");
 	}
 }
 const styles = StyleSheet.create({

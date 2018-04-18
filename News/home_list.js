@@ -33,13 +33,16 @@ var ScreenHeight = Dimensions.get('window').height;
 	  		keywords:"博物馆",
 	  };
 	}
-	getData(){
+	getData(args){
 		this.setState({
 			show:false
 		});
 		var that = this; 
 		// var url ="http://139.199.102.73:8080/api/news/search/?title="+this.state.keywords 
-		var url ="http://39.106.168.133:8080/api/news/latest"
+		if(args == "null"||args==null)
+			var url ="http://39.106.168.133:8080/api/news/latest"
+		else
+			var url = "http://39.106.168.133:8080/api/news/search?title="+args 
 		Util.getRequest(url,function(data){
 				if(!data || data.length==0)
 				{
@@ -72,8 +75,8 @@ var ScreenHeight = Dimensions.get('window').height;
 						<View style={[{},{flexDirection:"row",height:ScreenHeight/10,width:ScreenWidth,}]}>
 							<View style={{alignItems: 'center',borderWidth:1,borderRadius:10,},{margin:10,flexDirection:"row",width:ScreenWidth/1.2,}}>
 								<TouchableOpacity
-									onPress={()=>this._search()}
-									onChangeText={(text)=>this.setState({keywords:text})}	
+									onPress={()=>this.getData(this.state.keywords)}
+									// onChangeText={(text)=>this.setState({keywords:text})}	
 									// dataDetectorTypes={dall}
 								>
 									<Image
@@ -83,8 +86,8 @@ var ScreenHeight = Dimensions.get('window').height;
 								</TouchableOpacity>
 								<SearchBar
 									placeholder="输入新闻信息"
-									onPress={()=>this._searchPress(this.state.keywords)}	
-									// onChangeText={(text) => this._changeText(text)}	
+									// onPress={()=>this._searchPress(this.state.keywords)}	
+									onChangeText={(text) =>this.setState({keywords:text})}	
 								/>
 							</View>
 						</View>
@@ -121,7 +124,7 @@ var ScreenHeight = Dimensions.get('window').height;
 		return <View style={style} key={sectionID+rowID}></View>
 	}
 	componentDidMount(){
-		this.getData();
+		this.getData("null");
 	}
 }
 const styles = StyleSheet.create({

@@ -3,6 +3,7 @@ package com.task;
 import android.app.Application;
 import com.imagepicker.ImagePickerPackage;
 import com.facebook.react.ReactApplication;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.horcrux.svg.RNSvgPackage;
@@ -27,7 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-          new ImagePickerPackage()
+            new PickerPackage(),
+          new ImagePickerPackage(),
             new ReactNativeRestartPackage(),
             new ImagePickerPackage(),
             new RNSvgPackage(),

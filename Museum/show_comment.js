@@ -26,6 +26,14 @@ export default class Show extends Component {
             data:{
                 
             },
+            image: [
+                'http://iconfont.alicdn.com/t/1494395652678.png@32h_32w.jpg',
+                'http://iconfont.alicdn.com/t/1522115226069.jpg@32h_32w.jpg',
+                'http://iconfont.alicdn.com/t/1521166907866.png@32h_32w.jpg',
+                'http://iconfont.alicdn.com/t/1522311877342.jpg@32h_32w.jpg',
+                'http://iconfont.alicdn.com/t/1519886508485.jpg@32h_32w.jpg',
+                'http://iconfont.alicdn.com/t/1516429577407.png@32h_32w.jpg',
+            ],
             // avg_allscore:0,
             // sum_people:0,
             // avg_score0:0,
@@ -41,6 +49,7 @@ export default class Show extends Component {
     }
     _renderBody(){
         let len = this.state.data.length;
+        let all_img = this.state.image.length;
         // let score0 = 0,score1 = 0,score2 = 0,sum = 0;
         let Comments = [];
         for(var i = 0;i<len;i++){
@@ -48,9 +57,13 @@ export default class Show extends Component {
                 <View style={[styles.container,{paddingLeft :15,paddingRight:15 ,}]} key={"i" + i}>
                     <View style={{height:30,flexDirection: 'row',}}>
                         <Image
-                            source={require('./../Image/head.png')}
+                            // source={require('./../Image/head.png')}
+                            style={{height:32,width:32}}
+                            source={{ uri: this.state.image[i % all_img]}}
                         />
-                        <Text>
+                        <Text 
+                            style={{ fontSize: 20, fontStyle: "italic",color:"red"}}
+                        >
                             {this.state.data[i].loginname}
                         </Text>
                         <Star value={this._getScore(this.state.data[i])} />

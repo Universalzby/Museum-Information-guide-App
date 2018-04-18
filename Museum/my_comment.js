@@ -36,6 +36,7 @@ export default class Comment extends Component {
                 
             },
         };
+        global.Comment = false
     }
     _getavg(v1,v2,v3){
         var num = (v1 + v2+ v3) / 3;
@@ -60,18 +61,24 @@ export default class Comment extends Component {
         });
     }
     _submit(){
-        alert("成功提交")
+        // alert("成功提交")
         this._getdata();
+        global.Comment = true;
         // this.props.navigation.goBack();
         // RNRestart.Restart();
     }
     _clear(){
         alert("清空")
+        this.setState({
+            texts:""
+        })
     }
-    _back() {
+    back= (state, goBack)=> {
+        state.params.callBack("true")
         this.props.navigation.goBack();
     }
     render() {
+        const { navigate, state, goback, } = this.props.navigation;
         const { params } = this.props.navigation.state;
         return (
         <ScrollView>
@@ -79,7 +86,7 @@ export default class Comment extends Component {
                     <View style={[styles.common, { width: ScreenWidth / 5, height: ScreenHeight / 12 }]}>
                         <TouchableOpacity
                             style={[styles.common, {}]}
-                            onPress={() => this._back()}
+                            onPress={() => this.back(state,goback)}
                         >
                             <Icon />
                         </TouchableOpacity>
@@ -158,15 +165,19 @@ export default class Comment extends Component {
                     {/* <Text>
                         16{this.state.texts}
                     </Text> */}
-                <View style={[styles.input,{width:ScreenWidth}]}>
+                <View style={[styles.input,{width:ScreenWidth-10,paddingLeft:10,}]}>
                     <TextInput
-                        // style={styles.input}
+                        style={styles.input}
                         underlineColorAndroid='transparent' 
                         onChangeText={(text) => {
                                 this.setState({
                                     texts: text
                                 })
                             }}
+                        placeholder=""
+                        autoFocus={true}
+                        multiline={true}
+                        autoFocus={true}
                     />
                 </View>
                 <View style={{flexDirection: 'row-reverse',}}>
@@ -192,7 +203,7 @@ export default class Comment extends Component {
     _getdata() {
         const { params } = this.props.navigation.state;
         let formData = new FormData();
-        alert(global.id)
+        // alert(global.id)
         formData.append("coption", 1);
         formData.append("user_id", global.id);
         formData.append("content", this.state.texts);
