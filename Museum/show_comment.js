@@ -55,25 +55,28 @@ export default class Show extends Component {
         for(var i = 0;i<len;i++){
             Comments.push(
                 <View style={[styles.container,{paddingLeft :15,paddingRight:15 ,}]} key={"i" + i}>
-                    <View style={{height:30,flexDirection: 'row',}}>
+                    <View style={{flexDirection: 'row',}}>
                         <Image
                             // source={require('./../Image/head.png')}
                             style={{height:32,width:32}}
                             source={{ uri: this.state.image[i % all_img]}}
                         />
+                        <View style={{width:20}}></View>
                         <Text 
                             style={{ fontSize: 20, fontStyle: "italic",color:"red"}}
                         >
                             {this.state.data[i].loginname}
                         </Text>
-                        <Star value={this._getScore(this.state.data[i])} />
+                        <View style={{ height:32,justifyContent: 'center',marginLeft: 20, }}>
+                            <Star value={this._getScore(this.state.data[i])} />
+                        </View>
                     </View>
-                    <View style={{ height: 60}}>
-                        <Text>
+                    <View style={{marginTop: 10,paddingLeft: 5,}}>
+                        <Text style={{ fontWeight:"bold",color:"black"}}>
                             {this.state.data[i].content}
                         </Text>
                     </View>
-                    <View style={{ height: 50,flexDirection: 'row', width:ScreenWidth}}>
+                    <View style={{ height: 50,flexDirection: 'row', width:ScreenWidth,marginTop: 15,}}>
                         <View style={{ width: ScreenWidth/2}}>
                             <Text>
                                 {this.state.data[i].time}
@@ -158,7 +161,7 @@ var styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "white",
-        height:150,
+        // height:150,
     },
     common: {
         justifyContent: "center",

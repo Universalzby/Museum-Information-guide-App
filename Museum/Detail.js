@@ -26,15 +26,13 @@ class Detail extends Component {
         });
         this.state = {
             bookData: null,
-			name:global.username,
-            
+            name:global.username,
+            Data:null,
         };
     }
-    getData() {
+    getData(url) {
         var that = this;
-        const { params } = this.props.navigation.state;
-        // alert(params.bookID)
-        var url = "http://39.106.168.133:8080/api/museum/" + params.bookID;
+        
         Util.getRequest(url, function (data) {
             that.setState({
                 bookData: data
@@ -42,24 +40,27 @@ class Detail extends Component {
         }, function (error) {
             alert(error);
         })
+        
     }
     _back() {
         this.props.navigation.goBack();
     }
     _introduction(){
         // alert("相关信息");
+        // alert(this.state.bookData)
         this.props.navigation.navigate('message', {
             data: this.state.bookData,
         });
     }
     _gets(){
-        alert("展览");
+        // alert("展览");
         this.props.navigation.navigate('exhibition', {
             data: this.state.bookData,
+            Data:this.state.Data
         });
     }
     _news(){
-        alert("新闻");
+        // alert(JSON.stringify(this.state.bookData));
         this.props.navigation.navigate('news', {
             data: this.state.bookData,
         });
@@ -171,7 +172,19 @@ class Detail extends Component {
         );
     }
     componentDidMount() {
-        this.getData();
+        const { params } = this.props.navigation.state;
+        // alert(params.bookID)
+        var url = "http://39.106.168.133:8080/api/museum/" + params.bookID;
+        this.getData(url);
+        url = "http://39.106.168.133:8080/api/exhibition/" + params.bookID;
+        var that = this;
+        Util.getRequest(url, function (data) {
+            that.setState({
+                Data: data
+            })
+        }, function (error) {
+            alert(error);
+        })
     }
 }
 
@@ -182,7 +195,7 @@ var styles = StyleSheet.create({
     },
     block:{
         width: ScreenWidth, 
-        height: ScreenHeight*5/24,
+        height: ScreenHeight*5/12,
     },
     common: {
         justifyContent: "center",
@@ -190,7 +203,7 @@ var styles = StyleSheet.create({
         flexDirection: "row",
     },
     text:{
-        fontSize:20,
+        fontSize:30,
         color:"white",
     }
 });

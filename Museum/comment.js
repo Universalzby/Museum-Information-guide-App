@@ -42,7 +42,7 @@ export default class Comment extends Component {
         // alert("我也参与")
         
         let flushs = this.state.flush
-        alert(flushs)
+        // alert(flushs)
         const { params } = this.props.navigation.state;
         this.props.navigation.navigate('my_comment', {
             username:global.username,

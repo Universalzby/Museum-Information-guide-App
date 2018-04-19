@@ -31,6 +31,7 @@ export default class collect extends Component {
             show: false,
             dataSource: ds,
             keywords: "故宫博物院",
+            Data:null,
             image: [
                 'https://cdn.pixabay.com/photo/2018/02/04/21/13/monastery-3130879_960_720.jpg',
                 'https://picjumbo.com/wp-content/uploads/florence-at-night_free_stock_photos_picjumbo_DSC04580-2210x1473.jpg',
@@ -40,6 +41,7 @@ export default class collect extends Component {
                 'http://img.hb.aicdn.com/b2f584032e3bc70098ab857782be2eb03f32a8609025-S8sYPX_fw658',
             ],
         };
+        
     }
     renderImg() {
         var imageViews = [];
@@ -53,6 +55,19 @@ export default class collect extends Component {
             );
         }
         return imageViews;
+    }
+    getData() {
+        // const { params } = this.props.navigation.state;
+        // let url = "http://39.106.168.133:8080/api/exhibition/" + params.data.id;
+        // var that = this;
+        // Util.getRequest(url, function (data) {
+        //     that.setState({
+        //         Data: data
+        //     })
+        // }, function (error) {
+        //     alert(error);
+        // })
+        // alert(JSON.stringify(this.state.Data))
     }
     render() {
         const { params } = this.props.navigation.state;
@@ -72,33 +87,33 @@ export default class collect extends Component {
                         <Text style={styles.title}>{params.data.name}</Text>
 
                     </View>
-                    <View>
+                    {/* <View>
                         <Text style={styles.title}>教育活动</Text>
-                        <Text style={styles.text}>{params.data.edu_activity}</Text>
+                        <Text style={styles.text}>{params.data.edu_activity == null ? "暂无" : params.data.edu_activity}</Text>
                         <Text style={styles.title}>藏品</Text>
-                        <Text style={styles.text}>{params.data.collection}</Text>
+                        <Text style={styles.text}>{params.data.collection == null ? "暂无" : params.data.collection}</Text>
                         <Text style={styles.title}>学术研究信息</Text>
-                        <Text style={styles.text}>{params.data.academic}</Text>
-                    </View>
-                    {/* <View style={{ marginTop: 10 }}>
-                        <Text style={styles.title}>评论</Text>
-                        <Text style={styles.text}>用户:{global.username}</Text>
+                        <Text style={styles.text}>{params.data.academic == null ? "暂无" : params.data.academic}</Text>
                     </View> */}
-                    {/* {
-                        global.statement == false ?
-                            <View style={styles.common}>
-                                <Text>
-                                    登录查看评论
-								</Text>
-                            </View>
-                            :
-                            <Comments />
-                    } */}
+                    <View>
+                        <Text style={styles.title}>展览名称</Text>
+                        <Text style={styles.text}>{params.Data.title}</Text>
+                        <Text style={styles.title}>开放时间</Text>
+                        <Text style={styles.text}>{params.Data.time}</Text>
+                        <Text style={styles.title}>地点</Text>
+                        <Text style={styles.text}>{params.Data.address}</Text>
+                        <Text style={styles.title}>介绍</Text>
+                        <Text style={styles.text}>{params.Data.introduce}</Text>
+                    </View>
                     <View style={{ height: 55 }}>
                     </View>
                 </View>
             </ScrollView>
         );
+    }
+    
+    componentDidMount() {
+        this.getData();
     }
 }
 var styles = StyleSheet.create({

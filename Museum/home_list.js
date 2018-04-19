@@ -22,6 +22,7 @@ import Util from './../News/Util';
 import Detail from './Detail';
 import User_comment from './comment.js';
 import My_comment from './my_comment.js';
+import New from './news.js'
 var Dimensions = require('Dimensions');
 var ScreenWidth = Dimensions.get('window').width;
 var ScreenHeight = Dimensions.get('window').height;
@@ -91,6 +92,7 @@ class Home_list extends Component {
 										/>
 									</TouchableOpacity>
 									<SearchBar
+										
 										placeholder="输入博物馆名称"
 										onPress={() => this._searchPress(this.state.keywords)}
 										onChangeText={(text) =>{
@@ -199,6 +201,13 @@ const ModalStack = StackNavigator({
 		navigationOptions: {
 			headerTitle: '',
 			header:null
+		}
+	},
+	news:{
+		screen: New,
+		navigationOptions: {
+			headerTitle: '',
+			header: null
 		}
 	}
 });

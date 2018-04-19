@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   input:{
-  	fontSize:10,
+  	fontSize:15,
 	height:ScreenHeight/18,
 	width:ScreenWidth/1.3,
 	borderRadius:10,
